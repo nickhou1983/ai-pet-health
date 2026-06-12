@@ -1,22 +1,5 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+"""Entry point for uvicorn."""
 
-app = FastAPI(title="AI Pet Health API", version="0.1.0")
+from app.main import create_app
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-@app.get("/")
-async def root():
-    return {"message": "AI Pet Health API is running"}
-
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
+app = create_app()
