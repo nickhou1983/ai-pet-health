@@ -42,3 +42,6 @@ coverage/
 .coverage
 htmlcov/
 .pytest_cache/
+
+# Docker
+postgres_data/
