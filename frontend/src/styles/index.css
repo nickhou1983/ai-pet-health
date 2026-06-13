@@ -1,11 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+  --app-bg: #eef4f8;
+  --app-ink: #0f172a;
+  --app-grid: rgba(15, 23, 42, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  color: var(--app-ink);
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.13), transparent 30%),
+    radial-gradient(circle at right 20%, rgba(15, 23, 42, 0.08), transparent 18%),
+    linear-gradient(180deg, #f6fbff 0%, #edf3f7 48%, #e9f0f5 100%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--app-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--app-grid) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 70%);
+  opacity: 0.5;
+}
+
+#root {
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.18);
+  color: #082f49;
+}
+
+.consultation-markdown {
+  color: #334155;
+  word-break: break-word;
+}
+
+.consultation-markdown > *:first-child {
+  margin-top: 0;
+}
+
+.consultation-markdown > *:last-child {
+  margin-bottom: 0;
+}
+
+.consultation-markdown p,
+.consultation-markdown ul,
+.consultation-markdown ol,
+.consultation-markdown blockquote,
+.consultation-markdown pre,
+.consultation-markdown table {
+  margin: 0 0 0.95em;
+}
+
+.consultation-markdown ul,
+.consultation-markdown ol {
+  padding-left: 1.4em;
+}
+
+.consultation-markdown li + li {
+  margin-top: 0.35em;
+}
+
+.consultation-markdown h1,
+.consultation-markdown h2,
+.consultation-markdown h3,
+.consultation-markdown h4 {
+  margin: 1.2em 0 0.65em;
+  font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  color: #0f172a;
+  line-height: 1.05;
+}
+
+.consultation-markdown h1 {
+  font-size: 2rem;
+}
+
+.consultation-markdown h2 {
+  font-size: 1.7rem;
+}
+
+.consultation-markdown h3 {
+  font-size: 1.4rem;
+}
+
+.consultation-markdown a {
+  color: #0284c7;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.consultation-markdown strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.consultation-markdown code {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.16);
+  padding: 0.2em 0.45em;
+  font-size: 0.9em;
+}
+
+.consultation-markdown pre {
+  overflow-x: auto;
+  border-radius: 20px;
+  background: #e2e8f0;
+  padding: 1rem;
+}
+
+.consultation-markdown pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.consultation-markdown blockquote {
+  border-left: 3px solid rgba(14, 165, 233, 0.35);
+  padding-left: 1rem;
+  color: #475569;
+}
+
+.consultation-markdown table {
+  width: 100%;
+  overflow: hidden;
+  border-collapse: collapse;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.consultation-markdown th,
+.consultation-markdown td {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 0.8rem 0.95rem;
+  text-align: left;
+}
+
+.consultation-markdown th {
+  background: rgba(241, 245, 249, 0.95);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
 }
