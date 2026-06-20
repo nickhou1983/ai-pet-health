@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: {
+        brand: {
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
@@ -18,7 +15,12 @@ export default {
           700: '#0369a1',
           800: '#075985',
           900: '#0c4a6e',
+          950: '#082f49',
         },
+      },
+      fontFamily: {
+        sans: ['IBM Plex Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Cormorant Garamond', 'ui-serif', 'Georgia', 'serif'],
       },
     },
   },

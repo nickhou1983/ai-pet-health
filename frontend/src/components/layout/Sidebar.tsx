@@ -1,23 +1,32 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+const menuItems = [
+  { path: '/', label: '首页', icon: '🏠' },
+  { path: '/consultations', label: 'AI 问诊', icon: '🩺' },
+  { path: '/pets', label: '宠物档案', icon: '🐾' },
+]
 
 function Sidebar() {
-  const menuItems = [
-    { path: '/', label: '首页', icon: '🏠' },
-    { path: '/pets', label: '宠物档案', icon: '🐾' },
-  ]
-
   return (
-    <aside className="w-60 min-h-[calc(100vh-73px)] bg-white border-r border-gray-200 p-4 hidden md:block">
-      <nav className="space-y-1">
+    <aside className="w-full border-b border-white/60 bg-white/45 px-4 py-4 backdrop-blur lg:min-h-[calc(100vh-89px)] lg:w-72 lg:border-b-0 lg:border-r lg:px-5 lg:py-6">
+      <nav className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
         {menuItems.map((item) => (
-          <Link
+          <NavLink
             key={item.path}
             to={item.path}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
+            end={item.path === '/'}
+            className={({ isActive }) =>
+              [
+                'flex min-w-fit items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition duration-300',
+                isActive
+                  ? 'bg-brand-950 text-white shadow-[0_16px_50px_-28px_rgba(2,132,199,0.95)]'
+                  : 'text-slate-600 hover:bg-white/80 hover:text-brand-700',
+              ].join(' ')
+            }
           >
-            <span>{item.icon}</span>
+            <span className="text-lg">{item.icon}</span>
             <span>{item.label}</span>
-          </Link>
+          </NavLink>
         ))}
       </nav>
     </aside>

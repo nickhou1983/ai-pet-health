@@ -2,6 +2,9 @@ import { Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import Layout from './components/layout/Layout'
 import ProtectedRoute from './components/ProtectedRoute'
+import ConsultationListPage from './pages/ConsultationListPage'
+import ConsultationPage from './pages/ConsultationPage'
+import ConsultationReportPage from './pages/ConsultationReportPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
@@ -31,6 +34,13 @@ function App() {
               <HomePage />
             </ProtectedRoute>
           }
+        />
+        <Route path="consultations" element={<ConsultationListPage />} />
+        <Route path="consultation/new" element={<ConsultationListPage />} />
+        <Route path="consultation/:id" element={<ConsultationPage />} />
+        <Route
+          path="consultation/:id/report"
+          element={<ConsultationReportPage />}
         />
         <Route path="pets" element={<PetsPage />} />
         <Route path="pets/new" element={<AddPetPage />} />
