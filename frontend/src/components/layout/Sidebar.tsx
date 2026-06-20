@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 function Sidebar() {
   const menuItems = [
     { path: '/', label: '首页', icon: '🏠' },
+    { path: '/pets', label: '宠物档案', icon: '🐾' },
   ]
 
   return (
