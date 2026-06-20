@@ -1,20 +1,40 @@
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
 import Layout from './components/layout/Layout'
+import ProtectedRoute from './components/ProtectedRoute'
 import ConsultationListPage from './pages/ConsultationListPage'
 import ConsultationPage from './pages/ConsultationPage'
 import ConsultationReportPage from './pages/ConsultationReportPage'
 import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 import PetsPage from './pages/PetsPage'
 import AddPetPage from './pages/AddPetPage'
 import PetDetailPage from './pages/PetDetailPage'
 import EditPetPage from './pages/EditPetPage'
 import NotFoundPage from './pages/NotFoundPage'
+import { useAuthStore } from './stores/authStore'
 
 function App() {
+  const initialize = useAuthStore((state) => state.initialize)
+
+  useEffect(() => {
+    initialize()
+  }, [initialize])
+
   return (
     <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+        <Route
+          index
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="consultations" element={<ConsultationListPage />} />
         <Route path="consultation/new" element={<ConsultationListPage />} />
         <Route path="consultation/:id" element={<ConsultationPage />} />

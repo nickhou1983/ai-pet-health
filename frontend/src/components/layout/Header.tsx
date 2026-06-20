@@ -1,6 +1,15 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../stores/authStore'
 
 function Header() {
+  const { user, isAuthenticated, logout } = useAuthStore()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login')
+  }
+
   return (
     <header className="sticky top-0 z-30 border-b border-white/60 bg-white/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
@@ -41,6 +50,26 @@ function Header() {
           >
             AI 问诊
           </NavLink>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-gray-700">
+                {user?.nickname || user?.email || '用户'}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="text-sm text-gray-500 hover:text-red-600 transition-colors"
+              >
+                退出
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors"
+            >
+              登录
+            </Link>
+          )}
         </nav>
       </div>
     </header>

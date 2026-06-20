@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     OPENAI_MAX_TOKENS: int = 2000
     OPENAI_TEMPERATURE: float = 0.7
 
+    # JWT Authentication
+    SECRET_KEY: str = "change-me-in-production"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 
 
