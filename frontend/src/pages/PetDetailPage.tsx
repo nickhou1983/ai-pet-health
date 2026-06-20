@@ -3,7 +3,11 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { petApi } from '../api/pets'
 import { usePetStore } from '../stores/petStore'
 import AvatarUpload from '../components/pet/AvatarUpload'
+import HealthRecordTabs from '../components/health/HealthRecordTabs'
+import WeightChart from '../components/health/WeightChart'
 import type { Pet } from '../types/pet'
+
+type Tab = 'info' | 'health' | 'weight'
 
 function PetDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -12,6 +16,7 @@ function PetDetailPage() {
   const [pet, setPet] = useState<Pet | null>(null)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(false)
+  const [tab, setTab] = useState<Tab>('info')
 
   useEffect(() => {
     if (!id) return
@@ -56,13 +61,35 @@ function PetDetailPage() {
   if (!pet) return null
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="max-w-2xl mx-auto">
       <div className="flex items-center gap-2 mb-6">
         <Link to="/pets" className="text-gray-400 hover:text-gray-600">
           ← 返回
         </Link>
       </div>
 
+      <div className="mb-5 flex gap-2">
+        {([
+          ['info', '基本信息'],
+          ['health', '💉 健康记录'],
+          ['weight', '📈 体重趋势'],
+        ] as [Tab, string][]).map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => setTab(key)}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              tab === key
+                ? 'bg-brand-950 text-white'
+                : 'bg-white/70 text-slate-600 hover:bg-white'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {tab === 'info' && (
       <div className="bg-white rounded-xl shadow-md p-6">
         {/* Avatar and name */}
         <div className="flex flex-col items-center mb-6">
@@ -132,6 +159,19 @@ function PetDetailPage() {
           </button>
         </div>
       </div>
+      )}
+
+      {tab === 'health' && id && (
+        <div className="rounded-xl bg-white p-6 shadow-md">
+          <HealthRecordTabs petId={id} />
+        </div>
+      )}
+
+      {tab === 'weight' && id && (
+        <div className="rounded-xl bg-white p-6 shadow-md">
+          <WeightChart petId={id} />
+        </div>
+      )}
     </div>
   )
 }
