@@ -45,3 +45,6 @@ htmlcov/
 
 # Docker
 postgres_data/
+
+# Uploads
+backend/uploads/

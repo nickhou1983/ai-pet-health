@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 const menuItems = [
   { path: '/', label: '首页', icon: '🏠' },
   { path: '/consultations', label: 'AI 问诊', icon: '🩺' },
+  { path: '/pets', label: '宠物档案', icon: '🐾' },
 ]
 
 function Sidebar() {
